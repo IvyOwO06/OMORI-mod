@@ -7,8 +7,7 @@ SMODS.Atlas {
 }
 
 -- sounds
-SMODS.Sound({key = "arf", path = "arf.ogg",})
-SMODS.Sound({key = "arfBoom", path = "arfBoom.ogg",})
+SMODS.Sound({key = "test", path = "test.ogg",})
 
 -- Dog joker
 SMODS.Joker {

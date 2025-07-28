@@ -6,9 +6,9 @@ SMODS.Atlas {
 }
 
 SMODS.Enhancement {
-    key = 'stained',
+    key = 'omori',
     loc_txt = {
-        name = 'Stained Card',
+        name = 'OMORI',
         text = {
             "{C:green}1 in 2{} chance for",
             "{X:mult,C:white}X1.5{} Mult, always scores",

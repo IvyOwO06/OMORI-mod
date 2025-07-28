@@ -5,9 +5,7 @@ SMODS.Atlas {
     py = 95
 }
 
-SMODS.Sound({key = "gambleWin", path = "gambleWin.ogg",})
-SMODS.Sound({key = "gambleMiddleWin", path = "gambleMiddleWin.ogg",})
-SMODS.Sound({key = "gambleSmallWin", path = "gambleSmallWin.ogg",})
+SMODS.Sound({key = "test", path = "test.ogg",})
 
 -- Base gamble type
 SMODS.ConsumableType {
