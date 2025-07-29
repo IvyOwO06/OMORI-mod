@@ -1,6 +1,6 @@
-JOKER ideas
-- ALL JOKERS ARE GONNA DO SOMETHING BESIDE THE BASIC REQUIREMENT OR CONDITION IT NEEDS
+--- IDEAS ---
 
+-- JOKERS --
 - Sunny (faraway)
 - omori (headspace)
 - Kel (faraway)
@@ -15,10 +15,17 @@ JOKER ideas
 - Mari (faraway) has a 1 in 143 chance to "die" and spawns Something, can't appear again after "death"
 - Mari (headspace) has a 1 in 143 chance to "die" and spawns Something, can't appear again after "death"
 - Something can only appear after Mari (can be any version) "dies"
+- Duet (must have Mari (faraway) and Sunny): plays duet from omori and makes the user cry
 
-- would be cool if it's possible to have the headspace versions only show up after a certain condition or have the faraway versions swap after a certain game event and make the faraway versions no longer obtainable until it switches back again and owned jokers switch with their counterparts
-- or
+-- VOUCHERS --
 - tier 1 voucher switches sunny to omori
 - tier 2 voucher swaps all of the faraway versions to headspace
 
-- Duet (must have Mari (faraway) and Sunny): plays duet from omori and makes the user cry
+-- DECKS --
+- something deck unlocks after obtaining something after Mari (either version) "dies": starts run with Something, Omori and Basil (headspace), 7 joker slots
+
+--- CHALLENGES ---
+- only jokers from this mod (if that's possible)
+
+-- MISC --
+- would be cool if it's possible to have the headspace versions only show up after a certain condition or have the faraway versions swap after a certain game event and make the faraway versions no longer obtainable until it switches back again and owned jokers switch with their counterparts
