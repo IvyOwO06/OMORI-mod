@@ -15,14 +15,13 @@ SMODS.Joker {
     loc_txt = {
         name = 'Faraway Aubrey',
         text = {
-            "played {C:attention}ace, 4 and 3{} give {X:mult,C:white}X1.5{} Mult",
+            "Each played {C:attention}ace, 4 and 3{} give {X:mult,C:white}X1.5{} Mult",
             "{C:attention}Face cards{} are {C:red}debuffed{}"
         }
     },
     atlas = 'jokers',
     rarity = 2,
     cost = 6,
-    pools = {["OMORIJokers"] = true},
 
     unlocked = true,
     discovered = true,
@@ -36,17 +35,17 @@ SMODS.Joker {
         return {vars = { card.ability.extra.Xmult}}
     end,
 
-    calculate = function(self, card, context)
-        if context.before then
-            for _, c in ipairs(G.playing_cards) do
-                local id = c:get_id()
-                if id == 11 or id == 12 or id == 13 then
-                    c:set_debuff(true)
-                end
+    update = function(self, card, dt)
+        for _, c in ipairs(G.playing_cards) do
+            local id = c:get_id()
+            if id == 3 or id == 4 or id == 14 then
+                c:set_debuff(true)
             end
         end
+    end,
 
-        if context.joker_main then
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play then
             for i = 1, #context.full_hand do
                 local this_card = context.full_hand[i]
                 if this_card:get_id() == 14 or this_card:get_id() == 3 or this_card:get_id() == 4 then
@@ -65,14 +64,13 @@ SMODS.Joker {
     loc_txt = {
         name = 'Headspace Aubrey',
         text = {
-            "played {C:attention}Face cards{} give {X:mult,C:white}x1.5{} Mult",
+            "Each played {C:attention}Face cards{} give {X:mult,C:white}x1.5{} Mult",
             "{C:attention}ace, 3 and 4{} are {C:red}Debuffed{}"
         }
     },
     atlas = 'jokers',
-    rarity = 3,
-    cost = 10,
-    pools = {["OMORIJokers"] = true},
+    rarity = 'OM_OMORI',
+    cost = nil,
 
     unlocked = true,
     discovered = true,
@@ -86,17 +84,17 @@ SMODS.Joker {
         return {vars = { card.ability.extra.Xmult}}
     end,
 
-    calculate = function(self, card, context)
-        if context.before then
-            for _, c in ipairs(G.playing_cards) do
-                local id = c:get_id()
-                if id == 3 or id == 4 or id == 14 then
-                    c:set_debuff(true)
-                end
+    update = function(self, card, dt)
+        for _, c in ipairs(G.playing_cards) do
+            local id = c:get_id()
+            if id == 3 or id == 4 or id == 14 then
+                c:set_debuff(true)
             end
         end
+    end,
 
-        if context.joker_main then
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play then
             for i = 1, #context.full_hand do
                 local this_card = context.full_hand[i]
                 if this_card:get_id() == 11 or this_card:get_id() == 12 or this_card:get_id() == 13 then
@@ -110,9 +108,29 @@ SMODS.Joker {
 
 }
 
+SMODS.Joker {
+    key = 'perfectheart',
+    loc_txt = {
+        name = 'Perfect Heart',
+        text = {
+            "{C:attention}Retrigger{} each joker"
+        }
+    },
+    atlas = 'jokers',
+    rarity = 4,
+    cost = 25,
+    pools = {["OMORIJokers"] = true},
 
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = true,
+    preishable_compat = true,
 
--- -- Dog joker
+    config = {extra = {retrigger = 1}},
+}
+
+-- Dog joker
 -- SMODS.Joker {
 --     key = 'dog',
 --     loc_txt = {
