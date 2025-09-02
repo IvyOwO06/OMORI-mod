@@ -5,16 +5,23 @@
 - omori (headspace)
 - Kel (faraway)
 - Kel (headspace)
-- Aubrey (faraway)
-- Aubrey (headspace)
+- Aubrey (faraway) ace, 4, 3 gives x1.5 mult. face card are debuffed
+- Aubrey (headspace) jack, queen, king gives x1.5 mult. ace, 4, 3 are debuffed
 - Hero (faraway)
 - Hero (headspace)
 - Basil (faraway)
 - Basil (headspace)
-- Stranger
+- Stranger 
 - Mari (faraway) has a 1 in 143 chance to "die" and spawns Something, can't appear again after "death"
 - Mari (headspace) has a 1 in 143 chance to "die" and spawns Something, can't appear again after "death"
 - Something can only appear after Mari (can be any version) "dies"
+- jawsum 
+- gambling machine retrigger all played [suit] cards, suit changes at the end of round
+- inbred twins (diamonds)
+- sweetheart (hearts) if you gave space ex-boyfriend when you buy this joker sweetheart "runs" away
+- pluto (spades)
+- space (ex)-boyfriend (clubs) if you have sweetheart when you buy this joker sweetheart "runs" away
+- perfect heart (legendary) retrigger all Jokers
 - Duet (must have Mari (faraway) and Sunny): plays duet from omori and makes the user cry
 
 -- VOUCHERS --
