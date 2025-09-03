@@ -27,6 +27,8 @@ SMODS.current_mod.optional_features = {
 	post_trigger = true,
 }
 
+t2_vouch = false
+
 -- OMORI joker pool
 SMODS.ObjectType({
 	key = "OMORIJokers",
