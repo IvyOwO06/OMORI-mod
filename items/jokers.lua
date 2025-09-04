@@ -1,7 +1,7 @@
 -- joker atlas
 SMODS.Atlas {
     key = 'jokers',
-    path = 'placeholder.png',
+    path = 'jokers.png',
     px = 71,
     py = 95,
 }
@@ -20,6 +20,7 @@ SMODS.Joker {
         }
     },
     atlas = 'jokers',
+    pos = { x = 1, y = 0},
     rarity = 'OM_fa',
     cost = 10,
     pools = 
@@ -217,7 +218,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Something',
         text = {
-            "{X:chips,C:white}X#1#!{}"
+            "{X:chips,C:white}X!{}"
         }
     },
     atlas = 'jokers',
@@ -276,7 +277,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Basil',
         text = {
-            "each other OMORI joker gives {X:chips,C:white}X2.5{} chips",
+            "each other OMORI joker gives {X:chips,C:white}X#1#{} chips",
         }
     },
     atlas = 'jokers',
@@ -295,11 +296,15 @@ SMODS.Joker {
     preishable_compat = true,
 
     config = {extra = {x_chips = 2.5}},
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.x_chips}}
+    end
 }
 
 SMODS.Joker:take_ownership('joker',
     {
-        cost = 50,
+        cost = 4,
         rarity = "OM_jimbo",
         loc_txt = {
             name = 'Jimbo',
@@ -320,7 +325,7 @@ SMODS.Joker:take_ownership('joker',
                 }
             end
         end,
-        no_collection = true,
+        no_collection = false,
     },
     true -- true = wont show the joker with the mod badge
 )
