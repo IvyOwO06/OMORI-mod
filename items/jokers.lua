@@ -13,15 +13,19 @@ SMODS.Atlas {
 SMODS.Joker {
     key = 'faubrey',
     loc_txt = {
-        name = 'Faraway Aubrey',
+        name = 'Aubrey',
         text = {
-            "Each played {C:attention}ace, 4 and 3{} give {X:mult,C:white}X1.5{} Mult",
+            "Each played {C:attention}ace, 4 and 3{} give {X:mult,C:white}X#1#{} Mult",
             "{C:attention}Face cards{} are {C:red}debuffed{}"
         }
     },
     atlas = 'jokers',
-    rarity = 2,
-    cost = 6,
+    rarity = 'OM_fa',
+    cost = 10,
+    pools = 
+    {
+        ['OMORI'] = true,
+    },
 
     unlocked = true,
     discovered = true,
@@ -38,7 +42,7 @@ SMODS.Joker {
     update = function(self, card, dt)
         for _, c in ipairs(G.playing_cards) do
             local id = c:get_id()
-            if id == 3 or id == 4 or id == 14 then
+            if id == 11 or id == 12 or id == 13 then
                 c:set_debuff(true)
             end
         end
@@ -62,15 +66,20 @@ SMODS.Joker {
 SMODS.Joker {
     key = 'haubrey',
     loc_txt = {
-        name = 'Headspace Aubrey',
+        name = 'Aubrey',
         text = {
-            "Each played {C:attention}Face cards{} give {X:mult,C:white}x1.5{} Mult",
-            "{C:attention}ace, 3 and 4{} are {C:red}Debuffed{}"
+            "Each played {C:attention}Face cards{} give {X:mult,C:white}X#1#{} Mult",
+            "{C:attention}ace, 4 and 3{} are {C:red}Debuffed{}"
         }
     },
     atlas = 'jokers',
-    rarity = 'OM_OMORI',
-    cost = nil,
+    rarity = 'OM_hs',
+    cost = 20,
+    pools = 
+    {
+        ['headspace'] = true,
+        ['OMORI'] = true,
+    },
 
     unlocked = true,
     discovered = true,
@@ -78,7 +87,7 @@ SMODS.Joker {
     eternal_compat = true,
     preishable_compat = true,
 
-    config = {extra = {Xmult = 1.5}},
+    config = {extra = {Xmult = 2}},
 
     loc_vars = function(self, info_queue, card)
         return {vars = { card.ability.extra.Xmult}}
@@ -108,6 +117,7 @@ SMODS.Joker {
 
 }
 
+-- PERFECT HEART
 SMODS.Joker {
     key = 'perfectheart',
     loc_txt = {
@@ -119,7 +129,36 @@ SMODS.Joker {
     atlas = 'jokers',
     rarity = 4,
     cost = 25,
-    pools = {["OMORIJokers"] = true},
+    pools = 
+    {
+        ['OMORI'] = true,
+    },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = true,
+    preishable_compat = true,
+    
+}
+
+-- gambling machine
+SMODS.Joker {
+    key = 'gamblemachine',
+    loc_txt = {
+        name = 'Gambling Machine',
+        text = {
+            "retrigger all played {C:attention}#1#{} cards,", 
+            "{C:attention}suit{} changes at the {C:red}end of round{}"
+        }
+    },
+    atlas = 'jokers',
+    rarity = 3,
+    cost = 10,
+    pools = 
+    {
+        ['OMORI'] = true,
+    },
 
     unlocked = true,
     discovered = true,
@@ -127,8 +166,164 @@ SMODS.Joker {
     eternal_compat = true,
     preishable_compat = true,
 
-    config = {extra = {retrigger = 1}},
+    config = {
+        extra = {
+            suit = 'Spade',
+        },
+    }
 }
+
+-- Stranger
+SMODS.Joker {
+    key = 'stranger',
+    loc_txt = {
+        name = 'Stranger',
+        text = {
+            "{X:mult,C:white}X?{}"
+        }
+    },
+    atlas = 'jokers',
+    rarity = 'OM_od',
+    cost = 10,
+    pools = {
+        ['omori'] = true,
+        ['OMORI'] = true,
+    },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = true,
+    preishable_compat = true,
+
+    config = {extra = {Xmult = 1.5}},
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = { card.ability.extra.Xmult}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+            x_mult = math.random(1, 10) / 10 * math.random(1, 5)
+            }
+        end
+    end
+}
+
+-- Something
+SMODS.Joker {
+    key = 'something',
+    loc_txt = {
+        name = 'Something',
+        text = {
+            "{X:chips,C:white}X#1#!{}"
+        }
+    },
+    atlas = 'jokers',
+    rarity = 'OM_od',
+    cost = 20,
+    pools = {
+        ['omori'] = true,
+        ['OMORI'] = true,
+    },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = true,
+    preishable_compat = true,
+
+    config = {extra = {x_chips = 1.5}},
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = { card.ability.extra.x_chips}}
+    end,
+
+    calculate = function(self, card, context)
+        if context.joker_main then
+            return {
+            x_chips = math.random(1, 10) / 10 * math.random(5, 10)
+            }
+        end
+    end
+}
+
+SMODS.Joker {
+    key = 'fbasil',
+    loc_txt = {
+        name = 'Basil',
+        text = {
+            "nah",
+        }
+    },
+    atlas = 'jokers',
+    rarity = 'OM_fa',
+    cost = 20,
+    pools = {['OMORI'] = true},
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = true,
+    preishable_compat = true,
+
+    config = {extra = {}},
+}
+
+SMODS.Joker {
+    key = 'hbasil',
+    loc_txt = {
+        name = 'Basil',
+        text = {
+            "each other OMORI joker gives {X:chips,C:white}X2.5{} chips",
+        }
+    },
+    atlas = 'jokers',
+    rarity = 'OM_hs',
+    cost = 20,
+    pools = 
+    {
+        ['headspace'] = true,
+        ['OMORI'] = true,
+    },
+
+    unlocked = true,
+    discovered = true,
+    blueprint_compat = true,
+    eternal_compat = true,
+    preishable_compat = true,
+
+    config = {extra = {x_chips = 2.5}},
+}
+
+SMODS.Joker:take_ownership('joker',
+    {
+        cost = 50,
+        rarity = "OM_jimbo",
+        loc_txt = {
+            name = 'Jimbo',
+            text = {
+                "How did {C:red}you{} find {X:mult,C:white}me{}"
+            }
+        },
+        config = {extra = {Xmult = 50, x_chips = 100}},
+        loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.Xmult, card.ability.extra.x_chips}}
+        end,
+
+        calculate = function(self, card, context)
+            if context.joker_main then
+                return {
+                Xmult = card.ability.extra.Xmult * math.random(0, 100),
+                x_chips = card.ability.extra.x_chips * math.random(0, 100),
+                }
+            end
+        end,
+        no_collection = true,
+    },
+    true -- true = wont show the joker with the mod badge
+)
 
 -- Dog joker
 -- SMODS.Joker {

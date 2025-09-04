@@ -10,11 +10,11 @@
 - Hero (faraway)
 - Hero (headspace)
 - Basil (faraway)
-- Basil (headspace)
-- Stranger 
+- Basil (headspace) gives x2.5 chips for each other OMORI joker
+- Stranger gives a random value of Xmult between 1 and 5
 - Mari (faraway) has a 1 in 143 chance to "die" and spawns Something, can't appear again after "death"
 - Mari (headspace) has a 1 in 143 chance to "die" and spawns Something, can't appear again after "death"
-- Something can only appear after Mari (can be any version) "dies"
+- Something gives a random value of Xchips between 1 and 10
 - jawsum 
 - gambling machine retrigger all played [suit] cards, suit changes at the end of round
 - inbred twins (diamonds)
