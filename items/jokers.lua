@@ -111,6 +111,10 @@ SMODS.Joker {
                     return {
                     x_mult = card.ability.extra.Xmult
                     }
+                else
+                    return {
+                        x_mult = 0
+                    }
                 end
             end
         end
@@ -141,6 +145,24 @@ SMODS.Joker {
     eternal_compat = true,
     preishable_compat = true,
     
+    config = {extra = {retriggers = 1}},
+
+    loc_vars = function(self, info_queue, center)
+		return { vars = {center.ability.extra.retriggers} }
+	end,
+	calculate = function(self, card, context)
+		if context.retrigger_joker_check and not context.retrigger_joker and context.other_card ~= self then
+            for i = 1, #G.jokers.cards do
+			    if context.other_card == G.jokers.cards[i] then
+			    	return {
+			    		message = localize("k_again_ex"),
+			    		repetitions = card.ability.extra.retriggers,
+			    		card = card,
+			    	}
+			    end
+            end
+		end
+	end,
 }
 
 -- gambling machine
@@ -167,12 +189,32 @@ SMODS.Joker {
     eternal_compat = true,
     preishable_compat = true,
 
-    config = {
-        extra = {
-            suit = 'Spade',
-        },
-    }
+    config = { extra = { repetitions = 2 } },
+    loc_vars = function(self, info_queue, card)
+        local suit = (G.GAME.current_round.vremade_ancient_card or {}).suit or 'Spades'
+        return { vars = { card.ability.extra.xmult, localize(suit, 'suits_singular'), colours = { G.C.SUITS[suit] } } }
+    end,
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:is_suit(G.GAME.current_round.vremade_ancient_card.suit) then
+            return {
+                repetitions = card.ability.extra.repetitions
+            }
+        end
+    end
 }
+
+--- This changes vremade_ancient_card every round so every instance of Ancient Joker shares the same card.
+--- You could replace this with a context.end_of_round reset instead if you want the variables to be local.
+--- See SMODS.current_mod.reset_game_globals at the bottom of this file for when this function is called.
+local function reset_vremade_ancient_card()
+    G.GAME.current_round.vremade_ancient_card = G.GAME.current_round.vremade_ancient_card or { suit = 'Spades' }
+    local ancient_suits = {}
+    for k, v in ipairs({ 'Spades', 'Hearts', 'Clubs', 'Diamonds' }) do
+        if v ~= G.GAME.current_round.vremade_ancient_card.suit then ancient_suits[#ancient_suits + 1] = v end
+    end
+    local ancient_card = pseudorandom_element(ancient_suits, 'vremade_ancient' .. G.GAME.round_resets.ante)
+    G.GAME.current_round.vremade_ancient_card.suit = ancient_card
+end
 
 -- Stranger
 SMODS.Joker {
@@ -222,6 +264,7 @@ SMODS.Joker {
         }
     },
     atlas = 'jokers',
+    pos = { x = 2, y = 0},
     rarity = 'OM_od',
     cost = 20,
     pools = {
@@ -299,7 +342,15 @@ SMODS.Joker {
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.x_chips}}
-    end
+    end,
+
+    calculate = function(self, card, context)
+        if context.other_joker and (context.other_joker.config.center.pools == "OMORI") then
+            return {
+                x_chips = card.ability.extra.x_chips
+            }
+        end
+    end,
 }
 
 SMODS.Joker:take_ownership('joker',
@@ -1037,3 +1088,10 @@ SMODS.Joker:take_ownership('joker',
 --         end
 --     end,
 -- }
+
+function SMODS.current_mod.reset_game_globals(run_start)
+    -- reset_vremade_mail_rank()    -- See Mail-In Rebate
+    reset_vremade_ancient_card() -- See Ancient Joker
+    -- reset_vremade_castle_card()  -- See Castle
+    -- reset_vremade_idol_card()    -- See The Idol
+end

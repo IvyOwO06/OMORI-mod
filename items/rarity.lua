@@ -10,31 +10,40 @@ SMODS.Rarity {
 
 SMODS.Rarity {
     key = 'fa',
+    default_weight = 0.05,
     loc_txt = {
         name = 'Faraway Town'
     },
     badge_colour = HEX("599669"),
-    default_weight = 0.05,
+    get_weight = function(self, weight, object_type)
+        return weight
+    end,
     order = 6
 }
 
 SMODS.Rarity {
     key = 'od',
+    default_weight = 0.03,
     loc_txt = {
         name = 'Omori did not succumb'
     },
     badge_colour = HEX("000000"),
-    default_weight = 0.03,
+    get_weight = function(self, weight, object_type)
+        return weight
+    end,
     order = 7
 }
 
 SMODS.Rarity {
     key = 'ow',
+    default_weight = 0.03,
     loc_txt = {
         name = 'Omori will not succumb'
     },
     badge_colour = HEX("000000"),
-    default_weight = 0.03,
+    get_weight = function(self, weight, object_type)
+        return weight
+    end,
     order = 7
 }
 

@@ -31,8 +31,7 @@
 -- DECKS --
 - something deck unlocks after obtaining something after Mari (either version) "dies": starts run with Something, Omori and Basil (headspace), 7 joker slots
 
---- CHALLENGES ---
+-- CHALLENGES --
 - only jokers from this mod (if that's possible)
 
 -- MISC --
-- would be cool if it's possible to have the headspace versions only show up after a certain condition or have the faraway versions swap after a certain game event and make the faraway versions no longer obtainable until it switches back again and owned jokers switch with their counterparts
