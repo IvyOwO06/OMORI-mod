@@ -376,7 +376,7 @@ SMODS.Joker:take_ownership('joker',
                 }
             end
         end,
-        no_collection = false,
+        no_collection = true,
     },
     true -- true = wont show the joker with the mod badge
 )
