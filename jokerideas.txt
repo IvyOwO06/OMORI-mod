@@ -9,7 +9,7 @@
 - Aubrey (headspace) jack, queen, king gives x1.5 mult. ace, 4, 3 are debuffed
 - Hero (faraway)
 - Hero (headspace)
-- Basil (faraway)
+- Basil (faraway) gives rand(1, 10) gold at end of round
 - Basil (headspace) gives x2.5 chips for each other OMORI joker
 - Stranger gives a random value of Xmult between 1 and 5
 - Mari (faraway) has a 1 in 143 chance to "die" and spawns Something, can't appear again after "death"

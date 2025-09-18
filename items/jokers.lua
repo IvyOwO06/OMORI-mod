@@ -298,12 +298,13 @@ SMODS.Joker {
     loc_txt = {
         name = 'Basil',
         text = {
-            "nah",
+            "Gives between {C:money}1{} and {C:money}10{}",
+            "Dollars at the end of the round"
         }
     },
     atlas = 'jokers',
     rarity = 'OM_fa',
-    cost = 20,
+    cost = 10,
     pools = {['OMORI'] = true},
 
     unlocked = true,
@@ -312,7 +313,16 @@ SMODS.Joker {
     eternal_compat = true,
     preishable_compat = true,
 
-    config = {extra = {}},
+    config = {extra = {money = 1}},
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.money}}
+    end,
+
+    calc_dollar_bonus = function(self, card)
+        card.ability.extra.money = math.random(1, 10)
+        return card.ability.extra.money
+    end
 }
 
 SMODS.Joker {
