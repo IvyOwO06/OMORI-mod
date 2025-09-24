@@ -7,7 +7,50 @@ SMODS.Atlas {
 }
 
 -- sounds
--- SMODS.Sound({key = "test", path = "test.ogg",})
+SMODS.Sound({
+    key = "duet", 
+    path = "duet.ogg", 
+})
+SMDOS.Sound({
+    key = "savefile",
+    path = "file_saved.ogg",
+})
+SMODS.Sound({
+    key = "gameover",
+    path = "game_over.ogg",
+})
+SMODS.Sound({
+    key = "jawsumLaugh",
+    path = "jawsum_laugh.ogg",
+})
+SMODS.Sound({
+    key = "knock",
+    path = "knock.ogg",
+})
+SMODS.Sound({
+    key = "mewo",
+    path = "mewo.ogg",
+})
+SMODS.Sound({
+    key = "picnic",
+    path = "picnic_heal.ogg",
+})
+SMODS.Sound({
+    key = "sadPoem",
+    path = "sad_poem.ogg",
+})
+SMODS.Sound({
+    key = "slots",
+    path = "slot_machine.ogg",
+})
+SMODS.Sound({
+    key = "something",
+    path = "something.ogg",
+})
+SMODS.Sound({
+    key = "sweetheartLaugh",
+    path = "sweetheart_laugh.ogg",
+})
 
 -- faraway Aubrey
 SMODS.Joker {
@@ -287,7 +330,9 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.joker_main then
             return {
-            x_chips = math.random(1, 10) / 10 * math.random(5, 10)
+            x_chips = math.random(1, 10) / 10 * math.random(5, 10),
+            sound = 'OM_something',
+            message = 'Cry😭'
             }
         end
     end
@@ -431,45 +476,45 @@ SMODS.Joker:take_ownership('joker',
 --         end
 --         -- Checks to see if it's end of round, and if context.game_over is false.
 -- 		-- Also, not context.repetition ensures it doesn't get called during repetitions.
--- 		if context.end_of_round and not context.repetition and context.game_over == false and not context.blueprint then
--- 			-- Another pseudorandom thing, randomly generates a decimal between 0 and 1, so effectively a random percentage.
--- 			if pseudorandom('dog') < G.GAME.probabilities.normal / card.ability.extra.odds then
---                 G.GAME.pool_flags.dog_exploded = true
--- 				-- This part plays the animation.
--- 				G.E_MANAGER:add_event(Event({
--- 					func = function()
--- 						play_sound('tarot1')
--- 						card.T.r = -0.2
--- 						card:juice_up(0.3, 0.4)
--- 						card.states.drag.is = true
--- 						card.children.center.pinch.x = true
--- 						-- This part destroys the card.
--- 						G.E_MANAGER:add_event(Event({
--- 							trigger = 'after',
--- 							delay = 0.3,
--- 							blockable = false,
--- 							func = function()
--- 								G.jokers:remove_card(card)
--- 								card:remove()
--- 								card = nil
--- 								return true;
--- 							end
--- 						}))
--- 						return true
--- 					end
--- 				}))
--- 				return {
---                     sound = 'finnmod_arfBoom',
--- 					message = 'arf, BOOM!'
--- 				}
--- 			else
--- 				return {
---                     sound = 'finnmod_arf',
---                     message = 'arf'
--- 				}
--- 			end
--- 		end
--- 	end,
+	-- 	if context.end_of_round and not context.repetition and context.game_over == false and not context.blueprint then
+	-- 		-- Another pseudorandom thing, randomly generates a decimal between 0 and 1, so effectively a random percentage.
+	-- 		if pseudorandom('dog') < G.GAME.probabilities.normal / card.ability.extra.odds then
+    --             G.GAME.pool_flags.dog_exploded = true
+	-- 			-- This part plays the animation.
+	-- 			G.E_MANAGER:add_event(Event({
+	-- 				func = function()
+	-- 					play_sound('tarot1')
+	-- 					card.T.r = -0.2
+	-- 					card:juice_up(0.3, 0.4)
+	-- 					card.states.drag.is = true
+	-- 					card.children.center.pinch.x = true
+	-- 					-- This part destroys the card.
+	-- 					G.E_MANAGER:add_event(Event({
+	-- 						trigger = 'after',
+	-- 						delay = 0.3,
+	-- 						blockable = false,
+	-- 						func = function()
+	-- 							G.jokers:remove_card(card)
+	-- 							card:remove()
+	-- 							card = nil
+	-- 							return true;
+	-- 						end
+	-- 					}))
+	-- 					return true
+	-- 				end
+	-- 			}))
+	-- 			return {
+    --                 sound = 'finnmod_arfBoom',
+	-- 				message = 'arf, BOOM!'
+	-- 			}
+	-- 		else
+	-- 			return {
+    --                 sound = 'finnmod_arf',
+    --                 message = 'arf'
+	-- 			}
+	-- 		end
+	-- 	end
+	-- end,
 -- }
 
 -- -- tomagachi joker
