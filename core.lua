@@ -3,7 +3,7 @@
 --- MOD_ID: OMORI
 --- MOD_AUTHOR: Ivy___OwO & IhartDiscopolo
 --- MOD_DESCRIPTION: An OMORI mod.
---- PREFIX: OMORI
+--- PREFIX: OM
 ----------------------------------------------------------
 ----------- MOD CODE -------------------------------------
 

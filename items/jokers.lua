@@ -7,7 +7,50 @@ SMODS.Atlas {
 }
 
 -- sounds
--- SMODS.Sound({key = "test", path = "test.ogg",})
+SMODS.Sound({
+    key = "duet", 
+    path = "duet.ogg", 
+})
+SMDOS.Sound({
+    key = "savefile",
+    path = "file_saved.ogg",
+})
+SMODS.Sound({
+    key = "gameover",
+    path = "game_over.ogg",
+})
+SMODS.Sound({
+    key = "jawsumLaugh",
+    path = "jawsum_laugh.ogg",
+})
+SMODS.Sound({
+    key = "knock",
+    path = "knock.ogg",
+})
+SMODS.Sound({
+    key = "mewo",
+    path = "mewo.ogg",
+})
+SMODS.Sound({
+    key = "picnic",
+    path = "picnic_heal.ogg",
+})
+SMODS.Sound({
+    key = "sadPoem",
+    path = "sad_poem.ogg",
+})
+SMODS.Sound({
+    key = "slots",
+    path = "slot_machine.ogg",
+})
+SMODS.Sound({
+    key = "something",
+    path = "something.ogg",
+})
+SMODS.Sound({
+    key = "sweetheartLaugh",
+    path = "sweetheart_laugh.ogg",
+})
 
 -- faraway Aubrey
 SMODS.Joker {
@@ -111,6 +154,10 @@ SMODS.Joker {
                     return {
                     x_mult = card.ability.extra.Xmult
                     }
+                else
+                    return {
+                        x_mult = 0
+                    }
                 end
             end
         end
@@ -141,6 +188,24 @@ SMODS.Joker {
     eternal_compat = true,
     preishable_compat = true,
     
+    config = {extra = {retriggers = 1}},
+
+    loc_vars = function(self, info_queue, center)
+		return { vars = {center.ability.extra.retriggers} }
+	end,
+	calculate = function(self, card, context)
+		if context.retrigger_joker_check and not context.retrigger_joker and context.other_card ~= self then
+            for i = 1, #G.jokers.cards do
+			    if context.other_card == G.jokers.cards[i] then
+			    	return {
+			    		message = localize("k_again_ex"),
+			    		repetitions = card.ability.extra.retriggers,
+			    		card = card,
+			    	}
+			    end
+            end
+		end
+	end,
 }
 
 -- gambling machine
@@ -167,12 +232,32 @@ SMODS.Joker {
     eternal_compat = true,
     preishable_compat = true,
 
-    config = {
-        extra = {
-            suit = 'Spade',
-        },
-    }
+    config = { extra = { repetitions = 2 } },
+    loc_vars = function(self, info_queue, card)
+        local suit = (G.GAME.current_round.vremade_ancient_card or {}).suit or 'Spades'
+        return { vars = { card.ability.extra.xmult, localize(suit, 'suits_singular'), colours = { G.C.SUITS[suit] } } }
+    end,
+    calculate = function(self, card, context)
+        if context.individual and context.cardarea == G.play and context.other_card:is_suit(G.GAME.current_round.vremade_ancient_card.suit) then
+            return {
+                repetitions = card.ability.extra.repetitions
+            }
+        end
+    end
 }
+
+--- This changes vremade_ancient_card every round so every instance of Ancient Joker shares the same card.
+--- You could replace this with a context.end_of_round reset instead if you want the variables to be local.
+--- See SMODS.current_mod.reset_game_globals at the bottom of this file for when this function is called.
+local function reset_vremade_ancient_card()
+    G.GAME.current_round.vremade_ancient_card = G.GAME.current_round.vremade_ancient_card or { suit = 'Spades' }
+    local ancient_suits = {}
+    for k, v in ipairs({ 'Spades', 'Hearts', 'Clubs', 'Diamonds' }) do
+        if v ~= G.GAME.current_round.vremade_ancient_card.suit then ancient_suits[#ancient_suits + 1] = v end
+    end
+    local ancient_card = pseudorandom_element(ancient_suits, 'vremade_ancient' .. G.GAME.round_resets.ante)
+    G.GAME.current_round.vremade_ancient_card.suit = ancient_card
+end
 
 -- Stranger
 SMODS.Joker {
@@ -222,6 +307,7 @@ SMODS.Joker {
         }
     },
     atlas = 'jokers',
+    pos = { x = 2, y = 0},
     rarity = 'OM_od',
     cost = 20,
     pools = {
@@ -244,7 +330,9 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.joker_main then
             return {
-            x_chips = math.random(1, 10) / 10 * math.random(5, 10)
+            x_chips = math.random(1, 10) / 10 * math.random(5, 10),
+            sound = 'OM_something',
+            message = 'Cry😭'
             }
         end
     end
@@ -255,12 +343,13 @@ SMODS.Joker {
     loc_txt = {
         name = 'Basil',
         text = {
-            "nah",
+            "Gives between {C:money}1{} and {C:money}10{}",
+            "Dollars at the end of the round"
         }
     },
     atlas = 'jokers',
     rarity = 'OM_fa',
-    cost = 20,
+    cost = 10,
     pools = {['OMORI'] = true},
 
     unlocked = true,
@@ -269,7 +358,16 @@ SMODS.Joker {
     eternal_compat = true,
     preishable_compat = true,
 
-    config = {extra = {}},
+    config = {extra = {money = 1}},
+
+    loc_vars = function(self, info_queue, card)
+        return {vars = {card.ability.extra.money}}
+    end,
+
+    calc_dollar_bonus = function(self, card)
+        card.ability.extra.money = math.random(1, 10)
+        return card.ability.extra.money
+    end
 }
 
 SMODS.Joker {
@@ -299,7 +397,15 @@ SMODS.Joker {
 
     loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.x_chips}}
-    end
+    end,
+
+    calculate = function(self, card, context)
+        if context.other_joker and (context.other_joker.config.center.pools == "OMORI") then
+            return {
+                x_chips = card.ability.extra.x_chips
+            }
+        end
+    end,
 }
 
 SMODS.Joker:take_ownership('joker',
@@ -325,7 +431,7 @@ SMODS.Joker:take_ownership('joker',
                 }
             end
         end,
-        no_collection = false,
+        no_collection = true,
     },
     true -- true = wont show the joker with the mod badge
 )
@@ -370,45 +476,45 @@ SMODS.Joker:take_ownership('joker',
 --         end
 --         -- Checks to see if it's end of round, and if context.game_over is false.
 -- 		-- Also, not context.repetition ensures it doesn't get called during repetitions.
--- 		if context.end_of_round and not context.repetition and context.game_over == false and not context.blueprint then
--- 			-- Another pseudorandom thing, randomly generates a decimal between 0 and 1, so effectively a random percentage.
--- 			if pseudorandom('dog') < G.GAME.probabilities.normal / card.ability.extra.odds then
---                 G.GAME.pool_flags.dog_exploded = true
--- 				-- This part plays the animation.
--- 				G.E_MANAGER:add_event(Event({
--- 					func = function()
--- 						play_sound('tarot1')
--- 						card.T.r = -0.2
--- 						card:juice_up(0.3, 0.4)
--- 						card.states.drag.is = true
--- 						card.children.center.pinch.x = true
--- 						-- This part destroys the card.
--- 						G.E_MANAGER:add_event(Event({
--- 							trigger = 'after',
--- 							delay = 0.3,
--- 							blockable = false,
--- 							func = function()
--- 								G.jokers:remove_card(card)
--- 								card:remove()
--- 								card = nil
--- 								return true;
--- 							end
--- 						}))
--- 						return true
--- 					end
--- 				}))
--- 				return {
---                     sound = 'finnmod_arfBoom',
--- 					message = 'arf, BOOM!'
--- 				}
--- 			else
--- 				return {
---                     sound = 'finnmod_arf',
---                     message = 'arf'
--- 				}
--- 			end
--- 		end
--- 	end,
+	-- 	if context.end_of_round and not context.repetition and context.game_over == false and not context.blueprint then
+	-- 		-- Another pseudorandom thing, randomly generates a decimal between 0 and 1, so effectively a random percentage.
+	-- 		if pseudorandom('dog') < G.GAME.probabilities.normal / card.ability.extra.odds then
+    --             G.GAME.pool_flags.dog_exploded = true
+	-- 			-- This part plays the animation.
+	-- 			G.E_MANAGER:add_event(Event({
+	-- 				func = function()
+	-- 					play_sound('tarot1')
+	-- 					card.T.r = -0.2
+	-- 					card:juice_up(0.3, 0.4)
+	-- 					card.states.drag.is = true
+	-- 					card.children.center.pinch.x = true
+	-- 					-- This part destroys the card.
+	-- 					G.E_MANAGER:add_event(Event({
+	-- 						trigger = 'after',
+	-- 						delay = 0.3,
+	-- 						blockable = false,
+	-- 						func = function()
+	-- 							G.jokers:remove_card(card)
+	-- 							card:remove()
+	-- 							card = nil
+	-- 							return true;
+	-- 						end
+	-- 					}))
+	-- 					return true
+	-- 				end
+	-- 			}))
+	-- 			return {
+    --                 sound = 'finnmod_arfBoom',
+	-- 				message = 'arf, BOOM!'
+	-- 			}
+	-- 		else
+	-- 			return {
+    --                 sound = 'finnmod_arf',
+    --                 message = 'arf'
+	-- 			}
+	-- 		end
+	-- 	end
+	-- end,
 -- }
 
 -- -- tomagachi joker
@@ -1037,3 +1143,10 @@ SMODS.Joker:take_ownership('joker',
 --         end
 --     end,
 -- }
+
+function SMODS.current_mod.reset_game_globals(run_start)
+    -- reset_vremade_mail_rank()    -- See Mail-In Rebate
+    reset_vremade_ancient_card() -- See Ancient Joker
+    -- reset_vremade_castle_card()  -- See Castle
+    -- reset_vremade_idol_card()    -- See The Idol
+end
