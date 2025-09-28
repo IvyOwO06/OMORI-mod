@@ -1,46 +1,45 @@
--- SMODS.Atlas {
---     key = 'enhancements',
---     path = 'enhancements.png',
---     px = 70,
---     py = 95
--- }
+SMODS.Atlas {
+    key = 'enhancements',
+    path = 'enhancements.png',
+    px = 71,
+    py = 95
+}
 
--- SMODS.Enhancement {
---     key = 'omori',
---     loc_txt = {
---         name = 'OMORI',
---         text = {
---             "{C:green}1 in 2{} chance for",
---             "{X:mult,C:white}X1.5{} Mult, always scores",
---         }
---     },
---     always_scores = true,
---     atlas = 'enhancements',
---     pos = { x = 0, y = 0 },
+SMODS.Enhancement {
+    key = 'angry',
+    loc_txt = {
+        name = 'Angry',
+        text = {
+            "Very Angy D:<",
+        }
+    },
+    always_scores = true,
+    atlas = 'enhancements',
+    pos = { x = 1, y = 0 },
+}
 
---     config = { extra = { Xmult = 1.5, odds = 2 } },
---      loc_vars = function(self, info_queue, card)
---         return {
---             vars = {
---                 card.ability.extra.Xmul,
---                 (G.GAME.probabilities.normal or 1),
---                 card.ability.extra.odds
---             }
---         }
---     end,
+SMODS.Enhancement {
+    key = 'happy',
+    loc_txt = {
+        name = 'Happy',
+        text = {
+            "Very Happy :D",
+        }
+    },
+    always_scores = true,
+    atlas = 'enhancements',
+    pos = { x = 2, y = 0 },
+}
 
---     calculate = function(self, card, context)
---         if not (context.main_scoring and context.cardarea == G.play) then
---             return
---         end
-
---         if pseudorandom('stained') >= G.GAME.probabilities.normal / card.ability.extra.odds then
---             return
---         end
-
---         return {
---             x_mult = card.ability.extra.Xmult,
---             card = card
---         }
---     end,
--- }
+SMODS.Enhancement {
+    key = 'sad',
+    loc_txt = {
+        name = 'Sad',
+        text = {
+            "Very Sad T_T",
+        }
+    },
+    always_scores = true,
+    atlas = 'enhancements',
+    pos = { x = 3, y = 0 },
+}
