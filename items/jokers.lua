@@ -11,7 +11,7 @@ SMODS.Sound({
     key = "duet", 
     path = "duet.ogg", 
 })
-SMDOS.Sound({
+SMODS.Sound({
     key = "savefile",
     path = "file_saved.ogg",
 })
@@ -348,6 +348,7 @@ SMODS.Joker {
         }
     },
     atlas = 'jokers',
+    pos = {x = 3, y = 0},
     rarity = 'OM_fa',
     cost = 10,
     pools = {['OMORI'] = true},

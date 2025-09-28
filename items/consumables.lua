@@ -1,11 +1,75 @@
--- SMODS.Atlas {
---     key = 'consumables',
---     path = 'consumables.png',
---     px = 71,
---     py = 95
--- }
+SMODS.Atlas {
+    key = 'consumables',
+    path = 'consumables.png',
+    px = 71,
+    py = 95
+}
 
--- SMODS.Sound({key = "test", path = "test.ogg",})
+SMODS.ConsumableType {
+    object_type = "ConsumableType",
+    key = "emotions",
+    loc_txt = {
+        name = "Emotions",
+        collection = "Emotion Cards",
+
+        undiscovered = {
+            name = "Not Discovered",
+            text = {
+                "Purchase or use",
+                "this card in an",
+                "unseeded run to",
+                "learn what it does",
+            },
+        },
+    },
+    primary_colour = HEX("d2e8e3"),
+    secondary_colour = HEX("9f3fbf"),
+    collection_rows = { 3, 3 },
+    shop_rate = 0.0,
+    default = "c_OM_emotions"
+}
+
+SMODS.Consumable {
+    key = "angry",
+    loc_txt = {
+        name = "Angry",
+        text = {
+            "Very Angy D:<"
+        }
+    },
+    atlas = "consumables",
+    pos = {x = 1, y = 0},
+    set = "emotions",
+    cost = 4,
+}
+
+SMODS.Consumable {
+    key = "happy",
+    loc_txt = {
+        name = "Happy",
+        text = {
+            "Very Happy :D"
+        }
+    },
+    atlas = "consumables",
+    pos = {x = 2, y = 0},
+    set = "emotions",
+    cost = 4,
+}
+
+SMODS.Consumable {
+    key = "sad",
+    loc_txt = {
+        name = "Sad",
+        text = {
+            "Very Sad T_T"
+        }
+    },
+    atlas = "consumables",
+    pos = {x = 3, y = 0},
+    set = "emotions",
+    cost = 4,
+}
 
 -- -- Base gamble type
 -- SMODS.ConsumableType {
