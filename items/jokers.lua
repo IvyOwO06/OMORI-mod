@@ -63,7 +63,7 @@ SMODS.Joker {
     },
     atlas = 'jokers',
     pos = { x = 1, y = 0},
-    rarity = 'OM_fa',
+    rarity = 3,
     cost = 10,
     pools = 
     {
@@ -194,7 +194,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Gambling Machine',
         text = {
-            "retrigger all played {C:attention}#1#{} cards,", 
+            "retrigger all played {C:attention}#2#{} cards,", 
             "{C:attention}suit{} changes at the {C:red}end of round{}"
         }
     },
@@ -212,15 +212,19 @@ SMODS.Joker {
     eternal_compat = true,
     preishable_compat = true,
 
-    config = { extra = { repetitions = 2 } },
+    config = { extra = { repetitions = 2, suit = "" } },
     loc_vars = function(self, info_queue, card)
         local suit = (G.GAME.current_round.vremade_ancient_card or {}).suit or 'Spades'
-        return { vars = { card.ability.extra.xmult, localize(suit, 'suits_singular'), colours = { G.C.SUITS[suit] } } }
+        return { 
+            vars = { 
+                card.ability.extra.repetitions, localize(suit, 'suits_singular'), colours = { G.C.SUITS[suit] } 
+            } 
+        }
     end,
     calculate = function(self, card, context)
-        if context.individual and context.cardarea == G.play and context.other_card:is_suit(G.GAME.current_round.vremade_ancient_card.suit) then
+        if context.cardarea == G.play and context.repetition and context.other_card:is_suit(G.GAME.current_round.vremade_ancient_card.suit) then
             return {
-                repetitions = card.ability.extra.repetitions,
+                repetition = card.ability.extra.repetitions,
                 sound = "OM_slot_machine"
             }
         end
@@ -330,7 +334,7 @@ SMODS.Joker {
     },
     atlas = 'jokers',
     pos = {x = 3, y = 0},
-    rarity = 'OM_fa',
+    rarity = 3,
     cost = 10,
     pools = {['OMORI'] = true},
 
@@ -363,29 +367,31 @@ SMODS.Joker {
     atlas = 'jokers',
     rarity = 'OM_hs',
     cost = 20,
-    pools = 
-    {
+    pools = {
         ['headspace'] = true,
         ['OMORI'] = true,
     },
-
     unlocked = true,
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
     preishable_compat = true,
 
-    config = {extra = {x_chips = 2.5}},
+    config = { extra = { x_chips = 2.5 } },
 
     loc_vars = function(self, info_queue, card)
-        return {vars = {card.ability.extra.x_chips}}
+        local x = (card and card.ability and card.ability.extra and card.ability.extra.x_chips) or (self.config and self.config.extra and self.config.extra.x_chips) or 0
+        return { vars = { x } }
     end,
 
     calculate = function(self, card, context)
-        if context.other_joker and (context.other_joker.config.center.pools == "OMORI") then
-            return {
-                x_chips = card.ability.extra.x_chips
-            }
+        local other = context.other_joker
+        if not other then return end
+        if other == card then return end
+        if other.key and card.key and other.key == card.key then end
+
+        if other.config and other.config.center and other.config.center.rarity == "OM_hs" then
+            return { x_chips = card.ability.extra.x_chips }
         end
     end,
 }
@@ -400,7 +406,7 @@ SMODS.Joker:take_ownership('joker',
                 "How did {C:red}you{} find {X:mult,C:white}me{}"
             }
         },
-        config = {extra = {Xmult = 50, x_chips = 100}},
+        config = {extra = {Xmult = 50, x_chips = 100, gold = 1e12}},
         loc_vars = function(self, info_queue, card)
         return {vars = {card.ability.extra.Xmult, card.ability.extra.x_chips}}
         end,
@@ -410,6 +416,7 @@ SMODS.Joker:take_ownership('joker',
                 return {
                 Xmult = card.ability.extra.Xmult * math.random(0, 100),
                 x_chips = card.ability.extra.x_chips * math.random(0, 100),
+                p_dollars = card.ability.extra.gold * math.random(1, 100)
                 }
             end
         end,

@@ -34,8 +34,8 @@ SMODS.Consumable {
     loc_txt = {
         name = "Angry",
         text = {
-            "Select up to 2 Cards",
-            "to be enhanced to {C:red}Angry{}"
+            "Up to {C:attention}#1#{} selected",
+            "cards turn {C:mult}#2#{}"
         }
     },
     atlas = "consumables",
@@ -56,8 +56,8 @@ SMODS.Consumable {
     loc_txt = {
         name = "Happy",
         text = {
-            "Select up to 2 Cards",
-            "to be enhanced to {C:attention}Happy{}"
+            "Up to {C:attention}#1#{} selected",
+            "cards turn {C:gold}#2#{}"
         }
     },
     atlas = "consumables",
@@ -65,7 +65,7 @@ SMODS.Consumable {
     set = "emotions",
     cost = 4,
 
-        config = { max_highlighted = 2, mod_conv = 'm_OM_happy' },
+    config = { max_highlighted = 2, mod_conv = 'm_OM_happy' },
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
@@ -78,8 +78,8 @@ SMODS.Consumable {
     loc_txt = {
         name = "Sad",
         text = {
-            "Select up to 2 Cards",
-            "to be enhanced to {C:blue}Sad{}"
+            "Up to {C:attention}#1#{} selected",
+            "cards turn {C:chips}#2#{}"
         }
     },
     atlas = "consumables",
@@ -87,11 +87,16 @@ SMODS.Consumable {
     set = "emotions",
     cost = 4,
 
-        config = { max_highlighted = 2, mod_conv = 'm_OM_sad' },
+    config = { max_highlighted = 2, mod_conv = 'm_OM_sad' },
 
     loc_vars = function(self, info_queue, card)
         info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
-        return { vars = { card.ability.max_highlighted, localize { type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv } } }
+        return { 
+            vars = { 
+                card.ability.max_highlighted, 
+                localize { type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv } 
+            } 
+        }
     end
 }
 

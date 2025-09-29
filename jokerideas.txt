@@ -1,7 +1,6 @@
 --- IDEAS ---
 
 -- JOKERS --
-- JIMBO
 - Sunny (faraway)
 - omori (headspace)
 - Kel (faraway)
@@ -34,5 +33,21 @@
 
 -- CHALLENGES --
 - only jokers from this mod (if that's possible)
+
+-- ENHANCEMENTS --
+- Angry +4 mult
+- Furious +20 mult
+- enraged x3 mult
+- Happy +$3
+- Ecstatic +$10
+- Manic +$25
+- Sad +30 chips
+- Depressed +100 chips
+- Miserable x4 chips
+
+-- CONSUMABLES --
+- Angry (emotion) up to 2 selected cards turn Angry
+- Happy (emotion) up to 2 selected cards turn Happy
+- Sad (emotion) up to 2 selected cards turn Sad
 
 -- MISC --
