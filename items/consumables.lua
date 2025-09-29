@@ -34,13 +34,21 @@ SMODS.Consumable {
     loc_txt = {
         name = "Angry",
         text = {
-            "Very Angy D:<"
+            "Select up to 2 Cards",
+            "to be enhanced to {C:red}Angry{}"
         }
     },
     atlas = "consumables",
     pos = {x = 1, y = 0},
     set = "emotions",
     cost = 4,
+
+    config = { max_highlighted = 2, mod_conv = 'm_OM_angry' },
+
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
+        return { vars = { card.ability.max_highlighted, localize { type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv } } }
+    end
 }
 
 SMODS.Consumable {
@@ -48,13 +56,21 @@ SMODS.Consumable {
     loc_txt = {
         name = "Happy",
         text = {
-            "Very Happy :D"
+            "Select up to 2 Cards",
+            "to be enhanced to {C:attention}Happy{}"
         }
     },
     atlas = "consumables",
     pos = {x = 2, y = 0},
     set = "emotions",
     cost = 4,
+
+        config = { max_highlighted = 2, mod_conv = 'm_OM_happy' },
+
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
+        return { vars = { card.ability.max_highlighted, localize { type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv } } }
+    end
 }
 
 SMODS.Consumable {
@@ -62,13 +78,21 @@ SMODS.Consumable {
     loc_txt = {
         name = "Sad",
         text = {
-            "Very Sad T_T"
+            "Select up to 2 Cards",
+            "to be enhanced to {C:blue}Sad{}"
         }
     },
     atlas = "consumables",
     pos = {x = 3, y = 0},
     set = "emotions",
     cost = 4,
+
+        config = { max_highlighted = 2, mod_conv = 'm_OM_sad' },
+
+    loc_vars = function(self, info_queue, card)
+        info_queue[#info_queue + 1] = G.P_CENTERS[card.ability.mod_conv]
+        return { vars = { card.ability.max_highlighted, localize { type = 'name_text', set = 'Enhanced', key = card.ability.mod_conv } } }
+    end
 }
 
 -- -- Base gamble type

@@ -58,8 +58,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Aubrey',
         text = {
-            "Each played {C:attention}ace, 4 and 3{} give {X:mult,C:white}X#1#{} Mult",
-            "{C:attention}Face cards{} are {C:red}debuffed{}"
+            "Each played {C:attention}ace, 4 and 3{} give {X:mult,C:white}X#1#{} Mult"
         }
     },
     atlas = 'jokers',
@@ -83,15 +82,6 @@ SMODS.Joker {
         return {vars = { card.ability.extra.Xmult}}
     end,
 
-    update = function(self, card, dt)
-        for _, c in ipairs(G.playing_cards) do
-            local id = c:get_id()
-            if id == 11 or id == 12 or id == 13 then
-                c:set_debuff(true)
-            end
-        end
-    end,
-
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play then
             for i = 1, #context.full_hand do
@@ -112,8 +102,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Aubrey',
         text = {
-            "Each played {C:attention}Face cards{} give {X:mult,C:white}X#1#{} Mult",
-            "{C:attention}ace, 4 and 3{} are {C:red}Debuffed{}"
+            "Each played {C:attention}Face cards{} give {X:mult,C:white}X#1#{} Mult"
         }
     },
     atlas = 'jokers',
@@ -135,15 +124,6 @@ SMODS.Joker {
 
     loc_vars = function(self, info_queue, card)
         return {vars = { card.ability.extra.Xmult}}
-    end,
-
-    update = function(self, card, dt)
-        for _, c in ipairs(G.playing_cards) do
-            local id = c:get_id()
-            if id == 3 or id == 4 or id == 14 then
-                c:set_debuff(true)
-            end
-        end
     end,
 
     calculate = function(self, card, context)
@@ -240,7 +220,8 @@ SMODS.Joker {
     calculate = function(self, card, context)
         if context.individual and context.cardarea == G.play and context.other_card:is_suit(G.GAME.current_round.vremade_ancient_card.suit) then
             return {
-                repetitions = card.ability.extra.repetitions
+                repetitions = card.ability.extra.repetitions,
+                sound = "OM_slot_machine"
             }
         end
     end
@@ -376,7 +357,7 @@ SMODS.Joker {
     loc_txt = {
         name = 'Basil',
         text = {
-            "each other OMORI joker gives {X:chips,C:white}X#1#{} chips",
+            "each other {X:purple,C:white}OMORI{} joker gives {X:chips,C:white}X#1#{} chips",
         }
     },
     atlas = 'jokers',
