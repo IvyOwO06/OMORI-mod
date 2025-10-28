@@ -74,7 +74,7 @@ SMODS.Joker {
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    preishable_compat = true,
+    perishable_compat = true,
 
     config = {extra = {Xmult = 1.5}},
 
@@ -118,7 +118,7 @@ SMODS.Joker {
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    preishable_compat = true,
+    perishable_compat = true,
 
     config = {extra = {Xmult = 2}},
 
@@ -166,7 +166,7 @@ SMODS.Joker {
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    preishable_compat = true,
+    perishable_compat = true,
     
     config = {extra = {retriggers = 1}},
 
@@ -210,7 +210,7 @@ SMODS.Joker {
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    preishable_compat = true,
+    perishable_compat = true,
 
     config = { extra = { repetitions = 2, suit = "" } },
     loc_vars = function(self, info_queue, card)
@@ -265,7 +265,7 @@ SMODS.Joker {
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    preishable_compat = true,
+    perishable_compat = true,
 
     config = {extra = {Xmult = 1.5}},
 
@@ -304,7 +304,7 @@ SMODS.Joker {
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    preishable_compat = true,
+    perishable_compat = true,
 
     config = {extra = {x_chips = 1.5}},
 
@@ -342,7 +342,7 @@ SMODS.Joker {
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    preishable_compat = true,
+    perishable_compat = true,
 
     config = {extra = {money = 1}},
 
@@ -375,7 +375,7 @@ SMODS.Joker {
     discovered = true,
     blueprint_compat = true,
     eternal_compat = true,
-    preishable_compat = true,
+    perishable_compat = true,
 
     config = { extra = { x_chips = 2.5 } },
 
@@ -414,8 +414,8 @@ SMODS.Joker:take_ownership('joker',
         calculate = function(self, card, context)
             if context.joker_main then
                 return {
-                Xmult = card.ability.extra.Xmult * math.random(0, 100),
-                x_chips = card.ability.extra.x_chips * math.random(0, 100),
+                Xmult = card.ability.extra.Xmult * math.random(1, 100),
+                x_chips = card.ability.extra.x_chips * math.random(1, 100),
                 p_dollars = card.ability.extra.gold * math.random(1, 100)
                 }
             end
@@ -445,7 +445,7 @@ SMODS.Joker:take_ownership('joker',
 --     discovered = false,
 --     blueprint_compat = true,
 --     eternal_compat = true,
---     preishable_compat = true,
+--     perishable_compat = true,
 
 --     pos = {x = 0, y = 0},
 --     config = { extra = { mult = 2, odds = 5 } },
@@ -526,7 +526,7 @@ SMODS.Joker:take_ownership('joker',
 --     discovered = false,
 --     blueprint_compat = true,
 --     eternal_compat = true,
---     preishable_compat = true,
+--     perishable_compat = true,
 
 --     pos = {x = 1, y = 0},
 --     pixel_size = { w = 54, h = 64 },
@@ -603,7 +603,7 @@ SMODS.Joker:take_ownership('joker',
 --     discovered = false,
 --     blueprint_compat = true,
 --     eternal_compat = true,
---     preishable_compat = true,
+--     perishable_compat = true,
 
 --     pos = {x = 2, y = 0},
 --     config = { extra = { }},
@@ -674,7 +674,7 @@ SMODS.Joker:take_ownership('joker',
 --     discovered = false,
 --     blueprint_compat = true,
 --     eternal_compat = true,
---     preishable_compat = true,
+--     perishable_compat = true,
 
 --     pos = {x = 3, y = 0},
 --     config = { extra = { odds = 3 }},
@@ -737,7 +737,7 @@ SMODS.Joker:take_ownership('joker',
 --         discovered = false,
 --         blueprint_compat = false,
 --         eternal_compat = true,
---         preishable_compat = true,
+--         perishable_compat = true,
 
 --         config = { extra = { money = 1 }},
 
@@ -804,7 +804,7 @@ SMODS.Joker:take_ownership('joker',
 --     discovered = false,
 --     blueprint_compat = true,
 --     eternal_compat = true,
---     preishable_compat = true,
+--     perishable_compat = true,
 
 --     config = { extra = { x_mult = 1, gain = 0.25 }},
 
@@ -847,7 +847,7 @@ SMODS.Joker:take_ownership('joker',
 --     discovered = false,
 --     blueprint_compat = true,
 --     eternal_compat = true,
---     preishable_compat = true,
+--     perishable_compat = true,
 
 --     config = { extra = { d_size = 3, d_loss = 1, cards_remaining = 10, cards = 10  }},
 
@@ -938,7 +938,7 @@ SMODS.Joker:take_ownership('joker',
 --     discovered = false,
 --     blueprint_compat = true,
 --     eternal_compat = true,
---     preishable_compat = true,
+--     perishable_compat = true,
 
 --     config = { extra = { h_size = 3, h_loss = 1, discards_remaining = 15, discards = 15 }},
 
@@ -1030,7 +1030,7 @@ SMODS.Joker:take_ownership('joker',
 --     discovered = false,
 --     blueprint_compat = false,
 --     eternal_compat = true,
---     preishable_compat = true,
+--     perishable_compat = true,
 
 --     config = { extra = { money = 10, moneyLoss = 1, playAmount = 10 }},
 
@@ -1105,7 +1105,7 @@ SMODS.Joker:take_ownership('joker',
 --     discovered = false,
 --     blueprint_compat = false,
 --     eternal_compat = true,
---     preishable_compat = true,
+--     perishable_compat = true,
 
 --     config = { extra = { currentProb = 0, addedProbs = 1 }},
 
