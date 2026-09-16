@@ -323,6 +323,7 @@ SMODS.Joker {
     end
 }
 
+--faraway Basil
 SMODS.Joker {
     key = 'fbasil',
     loc_txt = {
@@ -356,6 +357,7 @@ SMODS.Joker {
     end
 }
 
+-- headspace Basil
 SMODS.Joker {
     key = 'hbasil',
     loc_txt = {
